@@ -6,6 +6,7 @@ class User:
         self.conn = mysql.connector.connect(**DB_CONFIG) #Uses DB_CONFIG from config.py
         self.cursor = self.conn.cursor(dictionary=True)
 
+    # Used for getting username
     def get_user_by_username(self, username):
         query = "SELECT * FROM users WHERE username = %s"
         self.cursor.execute(query, (username,))
