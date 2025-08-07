@@ -4,9 +4,11 @@ from model.user import User
 
 class AdminView:
     def __init__(self, controller):
+        
         self.controller = controller
         self.userModel= User()
         self.controlAdd = addUser(self.userModel)
+
         self.window = tk.Tk()
         self.window.title("Admin Panel")
         self.window.geometry("500x500")
@@ -35,14 +37,17 @@ class AdminView:
 
         # Closes the Window
         tk.Button(self.window, text="Close", command=self.window.destroy).pack(pady=10)
-        
+
         self.window.mainloop()
 
+    # loads users from "get_all_users" in user.py
     def load_users(self):
         self.user_listbox.delete(0, tk.END)
         users = self.userModel.get_all_users()
         for user in users:
             self.user_listbox.insert(tk.END, f"{user['username']} - {'Admin' if user['is_admin'] else 'User'}")
+    
+    # Used for adding new Users into the database
     def add_user(self):
         username = self.username_entry.get()
         password = self.password_entry.get()

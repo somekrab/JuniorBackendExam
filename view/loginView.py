@@ -31,6 +31,7 @@ class LoginView:
         username = self.username_entry.get()
         password = self.password_entry.get()
 
+        # Uses login from loginControl
         user = self.controller.login(username, password)
 
         # If successful, Login Window closes and opens admin/user window
@@ -40,5 +41,6 @@ class LoginView:
                 AdminView(self.controller)
             else:
                 UserView()
+        # For unsuccessful logins 
         else:
             messagebox.showerror("Login Failed", "Invalid username or password")
