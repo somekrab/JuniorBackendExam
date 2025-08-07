@@ -3,9 +3,7 @@ from view.loginView import LoginView
 
 def main():
     controller = LoginController()
-    view = LoginView(controller)
-    view.run()
-    controller.close()
+    LoginView(controller)
 
 if __name__ == "__main__":
     main()

@@ -10,6 +10,18 @@ class User:
         query = "SELECT * FROM users WHERE username = %s"
         self.cursor.execute(query, (username,))
         return self.cursor.fetchone()
+    
+    def insert_user(self, username, password, is_admin=False):
+        try:
+            self.cursor.execute(
+                "INSERT INTO users (username, password, is_admin) VALUES (%s, %s, %s)",
+                (username, password, is_admin)
+            )
+            self.conn.commit()
+            return True
+        except mysql.connector.Error as err:
+            print("Error:", err)
+            return False
 
     def close(self):
         self.cursor.close()
