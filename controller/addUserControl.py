@@ -2,8 +2,8 @@ from model.user import User
 import hashlib
 
 class addUser:
-    def __init__ (self):
-         self.model = User()
+    def __init__ (self, model):
+         self.model = model
 
     def hash_password(self, password):
         return hashlib.sha256(password.encode()).hexdigest()   

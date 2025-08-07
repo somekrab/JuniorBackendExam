@@ -22,10 +22,21 @@ class User:
         except mysql.connector.Error as err:
             print("Error:", err)
             return False
+        
     def get_non_admin_users(self):
         query = "SELECT username FROM users WHERE is_admin = FALSE"
         self.cursor.execute(query)
-        return [row[0] for row in self.cursor.fetchall()]
+        rows = self.cursor.fetchall()
+        usernames = []
+        for row in rows:
+            usernames.append(row['username'])
+        return usernames
+        
+    def get_all_users(self):
+        self.cursor.execute("SELECT username, is_admin FROM users")
+        rows = self.cursor.fetchall()
+        return [{"username": row['username'], "is_admin": row['is_admin']} for row in rows]
+        
     def close(self):
         self.cursor.close()
         self.conn.close()

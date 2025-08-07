@@ -1,6 +1,7 @@
 from controller.loginControl import LoginController
 from view.loginView import LoginView
 
+# Opens the Login Screen
 def main():
     controller = LoginController()
     LoginView(controller)
